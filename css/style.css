@@ -565,10 +565,6 @@ textarea:focus {
 .hero-area-height {
 	height: calc(100vh - 254px);
 	margin-bottom: -36px;
-	/* -webkit-text-stroke-width: thin; */
-	/* width: calc(135vh - 25px); */
-	margin-left: -220px;
-	margin-right: -220px;
 }
 
 .hero-area.active {
@@ -652,15 +648,15 @@ span.social-text {
 }
 
 .hero-text-shape span {
-	font-size: 290px;
-	-webkit-text-stroke: 1px #333;
+	font-size: 244px;
+	-webkit-text-stroke: 1.5px #3f3f3f;
 	-webkit-text-fill-color: transparent;
 }
 
 .hero-text-shape2 {
 	left: 37%;
 	top: 30%;
-	font-size: 250px;
+	font-size: 240px;
 }
 
 #venta-background {
@@ -704,23 +700,23 @@ span.social-text {
 }
 
 .hero-icon1 {
-	top: 50px;
-	left: 50px;
+	top: 30px;
+	left: 30px;
 }
 
 .hero-icon2 {
-	right: -20px;
-	top: 100px;
+	right: -40px;
+	top: 40px;
 }
 
 .hero-icon3 {
-	right: -22px;
-	bottom: 100px;
+	right: -30px;
+	bottom: 30px;
 }
 
 .hero-icon4 {
-	bottom: 50px;
-	left: 50px;
+	bottom: 10px;
+	left: 20px;
 }
 
 .hero-img:hover .hero-icon1 img {
