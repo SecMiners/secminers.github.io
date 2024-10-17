@@ -1,247 +1,231 @@
 (function ($) {
-	"use strict";
-	
-	// JS Index
-	//----------------------------------------
-	// 1. preloader
-	// 2. background image
-	// 3. Animate the scroll to top
-	// 4. Cats Filter
-	// 4. Circular Bars - Knob
-	// 5. accordion js
-	// 6. tilt js
-	// 7. mixitup js
-	// 8. Contact form
-	// 9. vanta js 
-	//-------------------------------------------------
- 
-	// 1. preloader
-	//---------------------------------------------------------------------------
-	$(window).load(function(){
-	    $('#preloader').fadeOut('slow',function(){$(this).remove();});
-	});
- 
-	// 2. background image
-	//---------------------------------------------------------------------------
-	$("[data-background]").each(function (){
-	    $(this).css("background-image","url(" + $(this).attr("data-background") + ")");
-	});
- 
-	// 3. Animate the scroll to top
-    // --------------------------------------------------------------------------
+    "use strict";
+
+    // JS Index
+    //----------------------------------------
+    // 1. preloader
+    // 2. background image
+    // 3. Animate the scroll to top
+    // 4. Cats Filter
+    // 5. Circular Bars - Knob
+    // 6. accordion js
+    // 7. tilt js
+    // 8. mixitup js
+    // 9. Contact form
+    // 10. vanta js 
+    //-------------------------------------------------
+
+    // 1. preloader
+    //---------------------------------------------------------------------------
+    $(window).load(function () {
+        $('#preloader').fadeOut('slow', function () {
+            $(this).remove();
+        });
+    });
+
+    // 2. background image
+    //---------------------------------------------------------------------------
+    $("[data-background]").each(function () {
+        $(this).css("background-image", "url(" + $(this).attr("data-background") + ")");
+    });
+
+    // 3. Animate the scroll to top
+    //---------------------------------------------------------------------------
     // Show or hide the sticky footer button
-	$(window).on('scroll', function() {
-		if($(this).scrollTop() > 100){
-		$('#scroll').addClass('show');
-		} else{
-		$('#scroll').removeClass('show');
-		}
-	});
+    $(window).on('scroll', function () {
+        if ($(this).scrollTop() > 100) {
+            $('#scroll').addClass('show');
+        } else {
+            $('#scroll').removeClass('show');
+        }
+    });
 
-	$('#scroll').on('click', function(event) {
-		event.preventDefault();
-		
-		$('html, body').animate({
-		scrollTop: 0,
-		}, 600);
-	});
-	
+    $('#scroll').on('click', function (event) {
+        event.preventDefault();
+        $('html, body').animate({
+            scrollTop: 0,
+        }, 600);
+    });
 
-
-
-
-	// 4. Cats Filter
-    // ---------------------------------------------------------------------------
-	
-	var $catsfilter = $('.cats-filter');
-
-	// Copy categories to item classes
-	$catsfilter.find('a').click(function() {
-		var currentOption = $(this).attr('data-filter');
-		$(this).parent().parent().find('a').removeClass('current');
-		$(this).addClass('current');
-	});	
-
- 
-	
+    // 4. Cats Filter
+    //---------------------------------------------------------------------------
+    var $catsfilter = $('.cats-filter');
+    // Copy categories to item classes
+    $catsfilter.find('a').click(function () {
+        var currentOption = $(this).attr('data-filter');
+        $(this).parent().parent().find('a').removeClass('current');
+        $(this).addClass('current');
+    });
 
     // 5. Circular Bars - Knob
-    // ---------------------------------------------------------------------------
-
-    	if (typeof ($.fn.knob) != 'undefined') {
-
-		$('.knob').each(function () {
-	
-			var $this = $(this),
-	
-			knobVal = $this.attr('data-rel');
-	
-			$this.knob({
-	
-			'draw': function () {
-		
-					$(this.i).val(this.cv + '%');
-		
-			}
-	
-		});
- 
-		$this.appear(function () {
-	
-		$({
-	
-				value: 0
-	
-		}).animate({
-	
-				value: knobVal
-	
-		}, {
-	
-			duration: 2000,
-	
-			easing: 'swing',
-	
-			step: function () {
-	
-			$this.val(Math.ceil(this.value)).trigger('change');
-	
-			}
-	
-		});
- 
-			}, {
-		
-			accX: 0,
-		
-			accY: -150
-		
-			});
- 
-		});
- 
- 	};
-
-
-
-
-	// 6. accordion js
-    // ---------------------------------------------------------------------------
-	$('.accordion-page-wrapper .collapse').collapse()
-
-
-
-
-//     // 7. tilt js
-//     // ---------------------------------------------------------------------------
-//     $('.tilt').tilt({
-// 		glare: true,
-//     		maxGlare: .5
-// 	});
-
-
-
-	
-	// 7. mixitup js
-    // --------------------------------------------------------------------------
-	mixitup('.mixitup-gallery', {
-		selectors: {
-		    control: '[data-mixitup-control]'
-		}
-	 });
-
-
-	 
-
-	// 8. Contact form 
     //---------------------------------------------------------------------------
-    $(function() {
-		// Here is the form
-		var form = $('#contact-form');
+    if (typeof ($.fn.knob) != 'undefined') {
+        $('.knob').each(function () {
+            var $this = $(this),
+                knobVal = $this.attr('data-rel');
 
-		// Getting the messages div
-		var formMessages = $('.form-message');
+            $this.knob({
+                'draw': function () {
+                    $(this.i).val(this.cv + '%');
+                }
+            });
 
+            $this.appear(function () {
+                $({
+                    value: 0
+                }).animate({
+                    value: knobVal
+                }, {
+                    duration: 2000,
+                    easing: 'swing',
+                    step: function () {
+                        $this.val(Math.ceil(this.value)).trigger('change');
+                    }
+                });
+            }, {
+                accX: 0,
+                accY: -150
+            });
+        });
+    }
 
-		// Setting up an event listener for the contact form
-		$(form).submit(function(event) {
-		// Stopping the browser to submit the form
-		event.preventDefault();
-		
-		// Serializing the form data
-		var formData = $(form).serialize();
+    // 6. accordion js
+    //---------------------------------------------------------------------------
+    $('.accordion-page-wrapper .collapse').collapse();
 
-		// Submitting the form using AJAX
-		$.ajax({
-			type: 'POST',
-			url: $(form).attr('action'),
-			data: formData
-		}).done(function(response) {
-		
-			// Making the formMessages div to have the 'success' class
-			$(formMessages).removeClass('error');
-			$(formMessages).addClass('success');
+    // 7. tilt js
+    //---------------------------------------------------------------------------
+    // $('.tilt').tilt({
+    //     glare: true,
+    //     maxGlare: .5
+    // });
 
-			// Setting the message text
-			$(formMessages).text(response);
+    // 8. mixitup js
+    //---------------------------------------------------------------------------
+    mixitup('.mixitup-gallery', {
+        selectors: {
+            control: '[data-mixitup-control]'
+        }
+    });
 
-			// Clearing the form after successful submission 
-			$('#inputName').val('');
-			$('#inputEmail').val('');
-			$('#inputPhone').val('');
-			$('#inputMessage').val('');
-		}).fail(function(data) {
-		
-			// Making the formMessages div to have the 'error' class
-			$(formMessages).removeClass('success');
-			$(formMessages).addClass('error');
+    // 9. Contact form 
+    //---------------------------------------------------------------------------
+    $(function () {
+        // Here is the form
+        var form = $('#contact-form');
+        // Getting the messages div
+        var formMessages = $('.form-message');
 
-			// Setting the message text
-			if (data.responseText !== '') {
-				$(formMessages).text(data.responseText);
-			} else {
-				$(formMessages).text('Oops! An error occurred and your message could not be sent.');
-			}
+        // Setting up an event listener for the contact form
+        $(form).submit(function (event) {
+            // Stopping the browser to submit the form
+            event.preventDefault();
+            // Serializing the form data
+            var formData = $(form).serialize();
+
+            // Submitting the form using AJAX
+            $.ajax({
+                type: 'POST',
+                url: $(form).attr('action'),
+                data: formData
+            }).done(function (response) {
+                // Making the formMessages div to have the 'success' class
+                $(formMessages).removeClass('error');
+                $(formMessages).addClass('success');
+                // Setting the message text
+                $(formMessages).text(response);
+                // Clearing the form after successful submission 
+                $('#inputName').val('');
+                $('#inputEmail').val('');
+                $('#inputPhone').val('');
+                $('#inputMessage').val('');
+            }).fail(function (data) {
+                // Making the formMessages div to have the 'error' class
+                $(formMessages).removeClass('success');
+                $(formMessages).addClass('error');
+                // Setting the message text
+                if (data.responseText !== '') {
+                    $(formMessages).text(data.responseText);
+                } else {
+                    $(formMessages).text('Oops! An error occurred and your message could not be sent.');
+                }
+            });
+        });
+    });
+
+    // for silder
+
+    $(document).ready(function () {
+		$('.customer-logos').slick({
+			slidesToShow: 4,
+			slidesToScroll: 1,
+			autoplay: true,
+			autoplaySpeed: 1000,
+			arrows: false,
+			dots: false,
+			pauseOnHover: true,
+			responsive: [{
+				breakpoint: 500,
+				settings: {
+					slidesToShow: 2
+				}
+			}, {
+				breakpoint: 500,
+				settings: {
+					slidesToShow: 1
+				}
+			}]
 		});
-
-		});
-
 	});
 
+	$(document).ready(function () {
+		$('.customer-logoss').slick({
+			slidesToShow: 5,
+			slidesToScroll: 1,
+			autoplay: true,
+			autoplaySpeed: 2000,
+			arrows: false,
+			dots: false,
+			pauseOnHover: true,
+			responsive: [{
+				breakpoint: 500,
+				settings: {
+					slidesToShow: 2
+				}
+			}, {
+				breakpoint: 500,
+				settings: {
+					slidesToShow: 1
+				}
+			}]
+		});
+	});
 
-	// 9.  VANTA js
-	//---------------------------------------------------------------------------
-	// VANTA.DOTS({
-	// 	el: "#venta-background",
-	// 	mouseControls: true,
-	// 	touchControls: true,
-	// 	gyroControls: false,
-	// 	backgroundColor: 0x0,
-	// 	color: 0x054077,
-	// //   minHeight: 200.00,
-	// //   minWidth: 200.00,
-	// 	scale: 1.00,
-	// 	scaleMobile: 1.00,
-	// 	showLines: false
-	// });
+    // 10. VANTA js
+    //---------------------------------------------------------------------------
+    // VANTA.DOTS({
+    //     el: "#venta-background",
+    //     mouseControls: true,
+    //     touchControls: true,
+    //     gyroControls: false,
+    //     backgroundColor: 0x0,
+    //     color: 0x054077,
+    //     scale: 1.00,
+    //     scaleMobile: 1.00,
+    //     showLines: false
+    // });
+
+    // Uncomment if using Magic Mouse Cursor
+    // options = {
+    //     "outerStyle": "circle",
+    //     "hoverEffect": "circle-move",
+    //     "hoverItemMove": false,
+    //     "defaultCursor": false,
+    //     "outerWidth": 30,
+    //     "outerHeight": 30
+    // }
+    // magicMouse(options);
+
 	
 
-
-
-
-
-	// options = {
-	// 	"outerStyle": "circle",
-	// 	"hoverEffect": "circle-move",
-	// 	"hoverItemMove": false,
-	// 	"defaultCursor": false,
-	// 	"outerWidth": 30,
-	// 	"outerHeight": 30
-	//    }
-	//    magicMouse(options);
-
-
-
-
-
- })(jQuery);
+})(jQuery);
